@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
+    <meta name="description"
+        content="LAURIXY - Explore our cutting-edge apps, web applications, websites, and games. Digital innovation at its finest.">
+    <meta name="theme-color" content="#0a0a0f">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>LAURIXY - DIGITAL INNOVATION HUB</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="https://i.ibb.co/QFVq0ND7/laurixy-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://i.ibb.co/mF454w2h/laurixy-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://i.ibb.co/YBMsHcSW/laurixy-180x180.png">
+    <link rel="icon" type="image/png" sizes="180x180" href="https://i.ibb.co/YBMsHcSW/laurixy-180x180.png">
+    <link rel="icon" type="image/png" href="https://i.ibb.co/NgQP2nZx/laurixy-logo-Edited.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="admin.css">
+    <script src="banner-ads.js"></script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "LAURIXY",
+      "url": "https://laurixy.github.io/"
+    }
+    </script>
+    <link rel="icon" type="image/png" href="favicon.png">
+</head>
+
+<body>
+    <!-- Canvas for particle system -->
+    <canvas id="particleCanvas"></canvas>
+
+    <!-- Animated grid background -->
+    <div class="grid-background"></div>
+
+    <!-- Mouse trail container -->
+    <div id="mouseTrail"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html">
+                    <img src="https://i.ibb.co/NgQP2nZx/laurixy-logo-Edited.png" alt="LAURIXY Logo" class="site-logo"
+                        style="height:40px;">
+                    <span class="logo-text" style="margin-left: 0.5rem;">LAURIXY</span>
+                </a>
+            </div>
+            <div class="nav-menu" id="navMenu">
+                <a href="#home" class="nav-link active">HOME</a>
+                <a href="#apps" class="nav-link">APPS</a>
+                <a href="#websites" class="nav-link">WEBSITES</a>
+                <a href="#games" class="nav-link">GAMES</a>
+                <a href="#about" class="nav-link">ABOUT</a>
+                <a href="#contact" class="nav-link">CONTACT</a>
+            </div>
+            <div class="auth-nav" id="authNav">
+                <!-- Not logged in state -->
+                <div class="auth-buttons" id="authButtons">
+                    <a href="login.html" class="nav-link" id="loginLink">LOGIN</a>
+                    <a href="signup.html" class="nav-link" id="signupLink">SIGN UP</a>
+                </div>
+                <!-- Logged in state -->
+                <div class="user-profile" id="userProfile" style="display: none;">
+                    <div class="user-avatar" id="userAvatar">H</div>
+                    <span class="user-name" id="userName">User</span>
+                    <a href="#" class="nav-link" id="logoutLink" onclick="logout()">LOGOUT</a>
+                </div>
+            </div>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="holographic-rings">
+            <div class="ring"></div>
+            <div class="ring"></div>
+            <div class="ring"></div>
+        </div>
+        <div class="hero-content">
+            <h1 class="glitch-text" data-text="LAURIXY">LAURIXY</h1>
+            <p class="hero-subtitle">DIGITAL INNOVATION HUB</p>
+            <div class="typing-text">
+                <span id="typingText"></span>
+                <span class="cursor">|</span>
+            </div>
+            <div class="hero-buttons">
+                <button class="btn-primary">DISCOVER INNOVATION</button>
+                <button class="btn-secondary">CONNECT WITH LAURIXY</button>
+            </div>
+            <div class="stats-container">
+                <div class="stat-item">
+                    <span class="stat-number" id="projectsCount" data-target="0">0</span>
+                    <span class="stat-label">PROJECTS</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="downloadsCount" data-target="0">0</span>
+                    <span class="stat-label">DOWNLOADS</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="satisfactionCount" data-target="99">99</span>
+                    <span class="stat-label">SATISFACTION</span>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <div class="mouse"></div>
+        </div>
+    </section>
+
+    <!-- Apps Section -->
+    <section id="apps" class="section">
+        <div class="container">
+            <h2 class="section-title">APPLICATIONS</h2>
+            <p class="section-subtitle">Smart, fast, and future-ready apps built for real-world impact.</p>
+            <div class="products-grid" id="apps">
+                <!-- Apps loaded from Firebase -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Websites Section -->
+    <section id="websites" class="section">
+        <div class="container">
+            <h2 class="section-title">WEBSITES</h2>
+            <p class="section-subtitle">Next-generation web platforms that empower users across the globe.</p>
+            <div class="products-grid" id="websites">
+                <!-- Websites loaded from Firebase -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Games Section -->
+    <section id="games" class="section">
+        <div class="container">
+            <h2 class="section-title">GAMES</h2>
+            <p class="section-subtitle">Next-level gaming experiences designed for players around the world.</p>
+            <div class="products-grid" id="games">
+                <!-- Games loaded from Firebase -->
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="container">
+            <h2 class="section-title">ABOUT LAURIXY</h2>
+            <p class="section-subtitle">Redefining innovation — building the software that powers tomorrow.</p>
+
+            <div class="about-container">
+                <div class="about-content">
+                    <div class="about-text">
+                        <h3 class="about-heading">WHO WE ARE</h3>
+                        <p class="about-description">
+                            Laurixy is a Digital Innovation Hub where technology meets creativity.
+                            We are a forward-thinking software development company focused on transforming existing
+                            digital solutions into smarter, faster, and more futuristic versions.
+
+                            At Laurixy, we analyze leading apps and rebuild them with compressed performance, sleek
+                            design, and enhanced functionality — crafting software that not only looks better but works
+                            brilliantly.
+
+                            Our team blends innovation with precision to deliver products that set new standards in
+                            efficiency, performance, and user experience.
+                            Every line of code reflects our passion for building technology that defines the future.
+                        </p>
+                        <p class="about-description">
+                            We turn innovation into impact — crafting intelligent, future-ready software that evolves
+                            with the world around it.
+                        </p>
+                    </div>
+
+                    <div class="about-text">
+                        <h3 class="about-heading">OUR VISION</h3>
+                        <p class="about-description">
+                            Our vision is to establish Laurixy as the world’s most trusted name in digital innovation —
+                            a hub where ideas evolve into intelligent realities.
+                            We aim to reshape how people interact with technology by creating lightweight, futuristic,
+                            and human-centered software that pushes boundaries beyond expectations.
+
+                            We believe in a world where technology isn’t just used — it’s experienced.
+                            Laurixy is building that world, one innovation at a time.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="founder-section">
+                    <div class="founder-image">
+                        <img src="https://i.ibb.co/Df847Mft/remove-photos-removed-background-1.png"
+                            alt="SheikhZada Haris" class="founder-photo"
+                            style="width:100%;height:100%;object-fit:cover;border-radius:50%;">
+                        <div class="founder-icon" style="display:none;">👤</div>
+                    </div>
+                    <div class="founder-info">
+                        <h3 class="founder-name">SHEIKHZADA HARIS</h3>
+                        <p class="founder-title">Founder & CEO</p>
+                        <p class="founder-bio">
+                            SheikhZada Haris is the visionary Founder and CEO of Laurixy, a next-generation Digital
+                            Innovation Hub redefining how software and AI shape the future.
+
+                            Driven by passion, creativity, and a deep understanding of technology, Haris built Laurixy
+                            with a single mission — to transform existing digital solutions into smarter, faster, and
+                            more futuristic experiences.
+
+                            With expertise across AI development, UI/UX design, web and mobile software, and creative
+                            branding, Haris leads Laurixy with innovation at its core. His approach blends technical
+                            mastery with imagination — turning ambitious ideas into practical, high-performance
+                            solutions that empower people and businesses worldwide.
+
+                            Under his leadership, Laurixy continues to grow as a symbol of innovation, intelligence, and
+                            impact — inspiring the next generation of creators to build beyond limits.
+
+                        </p>
+                        <div class="founder-quote">
+                            <div class="quote-icon">❝</div>
+                            <p class="quote-text">
+                                “The future doesn’t wait — we build it.”
+                                — SheikhZada Haris, Founder & CEO of LAURIXY
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="about-features">
+                <div class="feature-box">
+                    <div class="feature-icon">💡</div>
+                    <h4 class="feature-title">INNOVATION</h4>
+                    <p class="feature-text">Redefining the future through intelligent technology and visionary design.
+                    </p>
+                </div>
+                <div class="feature-box">
+                    <div class="feature-icon">🎯</div>
+                    <h4 class="feature-title">USER-FOCUSED</h4>
+                    <p class="feature-text">Crafting seamless experiences where technology adapts to people, not the
+                        other way around.</p>
+                </div>
+                <div class="feature-box">
+                    <div class="feature-icon">🚀</div>
+                    <h4 class="feature-title">EXCELLENCE</h4>
+                    <p class="feature-text">Pursuing perfection in every build — from the first line of code to the
+                        final experience.</p>
+                </div>
+                <div class="feature-box">
+                    <div class="feature-icon">🌍</div>
+                    <h4 class="feature-title">GLOBAL REACH</h4>
+                    <p class="feature-text">Empowering users and businesses worldwide with next-generation digital
+                        solutions.</p>
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <div class="container">
+            <h2 class="section-title">CONNECT WITH LAURIXY</h2>
+            <p class="section-subtitle">Ready to innovate with us? Connect and let’s shape the future together.</p>
+            <div class="contact-container">
+                <form class="contact-form" id="contactForm">
+                    <div class="form-group">
+                        <input type="text" id="name" name="name" required>
+                        <label for="name">NAME</label>
+                        <div class="form-line"></div>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" name="email" required>
+                        <label for="email">EMAIL</label>
+                        <div class="form-line"></div>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="subject" name="subject" required>
+                        <label for="subject">SUBJECT</label>
+                        <div class="form-line"></div>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="message" name="message" rows="5" required></textarea>
+                        <label for="message">MESSAGE</label>
+                        <div class="form-line"></div>
+                    </div>
+                    <button type="submit" class="btn-primary">SEND MESSAGE</button>
+                </form>
+                <div class="contact-info">
+                    <div class="info-item">
+                        <div class="info-icon">📧</div>
+                        <h3>EMAIL</h3>
+                        <p><a href="mailto:laurixyofficial@gmail.com"
+                                style="color: var(--text-secondary); text-decoration: none;">laurixyofficial@gmail.com</a>
+                        </p>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon">🌐</div>
+                        <h3>WEBSITE</h3>
+                        <p>www.laurixy.online</p>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon">💬</div>
+                        <h3>SUPPORT</h3>
+                        <p>We're here to help our users</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="https://i.ibb.co/NgQP2nZx/laurixy-logo-Edited.png" alt="LAURIXY Logo"
+                            class="site-logo" style="height:40px;">
+                        <span class="logo-text" style="margin-left: 0.5rem;">LAURIXY</span>
+                    </div>
+                    <p>A next-generation software company building smart, future-ready solutions for the world.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>PRODUCTS</h4>
+                    <a href="#apps">Applications</a>
+                    <a href="#websites">Websites</a>
+                    <a href="#games">Games</a>
+                </div>
+                <div class="footer-section">
+                    <h4>COMPANY</h4>
+                    <a href="#about">About Us</a>
+                    <a href="careers.html">Careers</a>
+                    <a href="blog.html">Blog</a>
+                    <a href="#contact">Contact</a>
+                </div>
+                <div class="footer-section">
+                    <h4>LEGAL</h4>
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms of Service</a>
+                    <a href="licensing.html">Licensing</>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 LAURIXY. All rights reserved.</p>
+                <div class="social-links">
+                    <a href="https://www.instagram.com/officiallaurixy/" target="_blank" rel="noopener noreferrer"
+                        class="social-link instagram-link" title="Follow us on Instagram">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1 1 12.324 0 6.162 6.162 0 0 1-12.324 0zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm4.965-10.322a1.44 1.44 0 1 1 2.881.001 1.44 1.44 0 0 1-2.881-.001z" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+    <script src="firebase-config.js"></script>
+    <script src="firebase-admin.js"></script>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

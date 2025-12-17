@@ -1,0 +1,438 @@
+/* Auth Pages Styling */
+.auth-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6rem 2rem 2rem;
+    position: relative;
+    z-index: 2;
+}
+
+.auth-container {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.auth-box {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(0, 240, 255, 0.2);
+    border-radius: 15px;
+    padding: 3rem;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.auth-box:hover {
+    border-color: var(--primary-cyan);
+    box-shadow: 0 0 40px var(--glow-cyan);
+    transform: translateY(-5px);
+}
+
+.auth-box h2 {
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    position: relative;
+    z-index: 2;
+}
+
+/* Form Options */
+.form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: -0.5rem 0;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+/* Checkbox Styling */
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding-left: 35px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    user-select: none;
+}
+
+.checkbox-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background: transparent;
+    border: 2px solid var(--primary-cyan);
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.checkbox-container:hover input ~ .checkmark {
+    box-shadow: 0 0 15px var(--glow-cyan);
+}
+
+.checkbox-container input:checked ~ .checkmark {
+    background: var(--primary-cyan);
+    box-shadow: 0 0 15px var(--glow-cyan);
+}
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.checkbox-container input:checked ~ .checkmark:after {
+    display: block;
+}
+
+.checkbox-container .checkmark:after {
+    left: 6px;
+    top: 2px;
+    width: 4px;
+    height: 10px;
+    border: solid var(--bg-dark);
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+/* Forgot Password Link */
+.forgot-password {
+    color: var(--primary-cyan);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.forgot-password:hover {
+    text-shadow: 0 0 10px var(--glow-cyan);
+}
+
+/* Auth Footer */
+.auth-footer {
+    text-align: center;
+    margin-top: 2rem;
+    color: var(--text-secondary);
+}
+
+.auth-footer a {
+    color: var(--primary-cyan);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.auth-footer a:hover {
+    text-shadow: 0 0 10px var(--glow-cyan);
+}
+
+/* Password Strength Indicator */
+.password-strength {
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-top: -1rem;
+}
+
+.strength-bar {
+    height: 100%;
+    width: 0;
+    transition: all 0.3s ease;
+    border-radius: 2px;
+}
+
+.strength-weak { background: #ff4444; }
+.strength-medium { background: #ffbb33; }
+.strength-strong { background: #00C851; }
+
+/* Error Messages */
+.error-message {
+    color: #ff4444;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+    display: none;
+}
+
+/* Success Messages */
+.success-message {
+    color: #00C851;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+    display: none;
+}
+
+/* Loading Indicator */
+.loading-spinner {
+    display: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(0, 240, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: var(--primary-cyan);
+    animation: spin 1s linear infinite;
+    margin: 0 auto;
+}
+
+@keyframes spin {
+    100% { transform: rotate(360deg); }
+}
+
+/* Responsive Design */
+/* iPad & Tablets (1024px and below) */
+@media (max-width: 1024px) {
+    .auth-section {
+        padding: 7rem 2rem 2rem;
+    }
+
+    .auth-box {
+        padding: 2.5rem;
+        max-width: 90%;
+    }
+}
+
+/* Tablets (768px and below) */
+@media (max-width: 768px) {
+    .auth-box {
+        padding: 2rem;
+        max-width: 95%;
+    }
+
+    .form-options {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .auth-box h2 {
+        font-size: 2.5rem;
+    }
+
+    /* Adjust form spacing */
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        font-size: 1rem;
+    }
+}
+
+/* Mobile Landscape (640px and below) */
+@media (max-width: 640px) {
+    .auth-section {
+        padding: 5rem 1rem 1rem;
+    }
+
+    .auth-box {
+        padding: 1.8rem;
+    }
+
+    .auth-box h2 {
+        font-size: 2.2rem;
+        margin-bottom: 2rem;
+    }
+
+    /* Stack form elements */
+    .form-group {
+        margin-bottom: 1.2rem;
+    }
+
+    .form-group label {
+        font-size: 0.9rem;
+    }
+}
+
+/* Mobile Portrait (480px and below) */
+@media (max-width: 480px) {
+    .auth-section {
+        padding: 4rem 1rem 1rem;
+    }
+
+    .auth-box {
+        padding: 1.5rem;
+        border-radius: 10px;
+    }
+
+    .auth-box h2 {
+        font-size: 2rem;
+        margin-bottom: 1.8rem;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        font-size: 0.95rem;
+    }
+
+    .form-options {
+        gap: 0.8rem;
+    }
+
+    .checkbox-container {
+        font-size: 0.85rem;
+    }
+
+    .forgot-password {
+        font-size: 0.85rem;
+    }
+
+    .auth-footer {
+        margin-top: 1.5rem;
+        font-size: 0.9rem;
+    }
+}
+
+/* Small Mobile (360px and below) */
+@media (max-width: 360px) {
+    .auth-box {
+        padding: 1.2rem;
+    }
+
+    .auth-box h2 {
+        font-size: 1.8rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .form-group {
+        margin-bottom: 1rem;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        font-size: 0.9rem;
+    }
+
+    .btn-primary {
+        padding: 0.8rem 2rem;
+        font-size: 0.9rem;
+    }
+}
+
+/* Handle smaller heights */
+@media (max-height: 600px) and (orientation: landscape) {
+    .auth-section {
+        padding: 4rem 1rem 1rem;
+        min-height: auto;
+    }
+
+    .auth-box {
+        margin: 1rem auto;
+    }
+
+    .form-group {
+        margin-bottom: 0.8rem;
+    }
+}
+
+/* Auth Box Animation */
+.auth-box {
+    animation: authBoxFadeIn 0.6s ease forwards;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+@keyframes authBoxFadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Form Validation Styles */
+.form-group.error input {
+    border-color: #ff4444;
+}
+
+.form-group.success input {
+    border-color: #00C851;
+}
+
+.validation-message {
+    position: absolute;
+    bottom: -20px;
+    left: 0;
+    font-size: 0.8rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.form-group.error .validation-message {
+    color: #ff4444;
+    opacity: 1;
+}
+
+.form-group.success .validation-message {
+    color: #00C851;
+    opacity: 1;
+}
+
+/* Password toggle button */
+.password-group {
+    position: relative;
+}
+
+.password-toggle {
+    position: absolute;
+    top: 50%;
+    right: 0.5rem;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--primary-cyan);
+    text-shadow: 0 0 8px var(--glow-cyan);
+    transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+.password-toggle .eye {
+    font-size: 18px;
+    line-height: 1;
+    display: inline-block;
+}
+
+.password-toggle:hover {
+    transform: translateY(-50%) scale(1.05);
+}
+
+.password-toggle.visible .eye::after {
+    content: '👁️';
+}
+
+.password-toggle .eye::after {
+    content: '🙈';
+}
+
+/* Small screens adjustments */
+@media (max-width: 480px) {
+    .password-toggle {
+        width: 32px;
+        height: 32px;
+    }
+    .password-toggle .eye { font-size: 16px; }
+}

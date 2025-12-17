@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
+    <meta name="description" content="LAURIXY - Blog - Latest News and Insights">
+    <meta name="theme-color" content="#0a0a0f">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>LAURIXY - BLOG</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="https://i.ibb.co/QFVq0ND7/laurixy-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://i.ibb.co/mF454w2h/laurixy-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://i.ibb.co/YBMsHcSW/laurixy-180x180.png">
+    <link rel="icon" type="image/png" sizes="180x180" href="https://i.ibb.co/YBMsHcSW/laurixy-180x180.png">
+    <link rel="icon" type="image/png" href="https://i.ibb.co/NgQP2nZx/laurixy-logo-Edited.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .blog-card {
+            background: rgba(0, 217, 255, 0.05);
+            border: 1px solid #00d9ff;
+            border-radius: 15px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .blog-card:hover {
+            background: rgba(0, 217, 255, 0.1);
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px rgba(0, 217, 255, 0.3);
+        }
+
+        .blog-card h3 {
+            color: #00d9ff;
+            margin-bottom: 10px;
+        }
+
+        .blog-date {
+            color: #ff006e;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .blog-excerpt {
+            color: #e0e0e0;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .blog-read-more {
+            color: #8338ec;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .blog-read-more:hover {
+            color: #00d9ff;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="particleCanvas"></canvas>
+    <div class="grid-background"></div>
+    <div id="mouseTrail"></div>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html">
+                    <img src="https://i.ibb.co/NgQP2nZx/laurixy-logo-Edited.png" alt="LAURIXY Logo" class="site-logo"
+                        style="height:40px;">
+                    <span class="logo-text" style="margin-left: 0.5rem;">LAURIXY</span>
+                </a>
+            </div>
+            <div class="nav-menu" id="navMenu">
+                <a href="index.html" class="nav-link">HOME</a>
+                <a href="index.html#apps" class="nav-link">APPS</a>
+                <a href="index.html#websites" class="nav-link">WEBSITES</a>
+                <a href="index.html#games" class="nav-link">GAMES</a>
+                <a href="index.html#about" class="nav-link">ABOUT</a>
+                <a href="index.html#contact" class="nav-link">CONTACT</a>
+            </div>
+            <div class="auth-nav" id="authNav">
+                <div class="auth-buttons" id="authButtons">
+                    <a href="login.html" class="nav-link" id="loginLink">LOGIN</a>
+                    <a href="signup.html" class="nav-link" id="signupLink">SIGN UP</a>
+                </div>
+                <div class="user-profile" id="userProfile" style="display: none;">
+                    <div class="user-avatar" id="userAvatar">H</div>
+                    <span class="user-name" id="userName">User</span>
+                    <a href="#" class="nav-link" id="logoutLink" onclick="logout()">LOGOUT</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section class="content-section" style="padding: 100px 20px; min-height: 100vh;">
+        <div class="container" style="max-width: 1000px; margin: 0 auto;">
+            <h1 class="glitch-text" data-text="BLOG" style="text-align: center; margin-bottom: 20px;">BLOG</h1>
+            <p style="text-align: center; color: #00d9ff; font-size: 18px; margin-bottom: 50px;">
+                Stay updated with Laurixy's latest innovations, app releases, tech insights, and behind-the-scenes
+                stories from our creative journey.
+            </p>
+
+            <div class="blog-grid">
+                <div class="blog-card">
+                    <h3>🚀 Introducing Laurixy 2.0</h3>
+                    <div class="blog-date">November 10, 2025</div>
+                    <p class="blog-excerpt">
+                        We're thrilled to announce the launch of Laurixy 2.0 with enhanced features, improved
+                        performance, and a completely redesigned user interface.
+                    </p>
+                    <a href="#" class="blog-read-more">Read More →</a>
+                </div>
+
+                <div class="blog-card">
+                    <h3>💡 The Future of Digital Innovation</h3>
+                    <div class="blog-date">November 8, 2025</div>
+                    <p class="blog-excerpt">
+                        Explore our vision for the future of digital innovation and how we're shaping the next
+                        generation of digital tools.
+                    </p>
+                    <a href="#" class="blog-read-more">Read More →</a>
+                </div>
+
+                <div class="blog-card">
+                    <h3>🎨 Design Philosophy Behind Laurixy</h3>
+                    <div class="blog-date">November 5, 2025</div>
+                    <p class="blog-excerpt">
+                        Discover the design principles and creative process that guide every product we create at
+                        Laurixy.
+                    </p>
+                    <a href="#" class="blog-read-more">Read More →</a>
+                </div>
+
+                <div class="blog-card">
+                    <h3>🔧 Behind the Scenes: Our Tech Stack</h3>
+                    <div class="blog-date">November 1, 2025</div>
+                    <p class="blog-excerpt">
+                        Learn about the technologies and frameworks we use to build fast, reliable, and scalable
+                        applications.
+                    </p>
+                    <a href="#" class="blog-read-more">Read More →</a>
+                </div>
+
+                <div class="blog-card">
+                    <h3>🌟 Meet the Laurixy Team</h3>
+                    <div class="blog-date">October 28, 2025</div>
+                    <p class="blog-excerpt">
+                        Get to know the talented developers, designers, and creators who make Laurixy possible.
+                    </p>
+                    <a href="#" class="blog-read-more">Read More →</a>
+                </div>
+
+                <div class="blog-card">
+                    <h3>📱 Mobile-First Development Approach</h3>
+                    <div class="blog-date">October 25, 2025</div>
+                    <p class="blog-excerpt">
+                        Why we prioritize mobile experience and how it shapes our development strategy.
+                    </p>
+                    <a href="#" class="blog-read-more">Read More →</a>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 50px;">
+                <p style="color: #8338ec; font-size: 16px;">
+                    More posts coming soon... Check back regularly for updates!
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2025 LAURIXY. All Rights Reserved. |
+                <a href="licensing.html" style="color: #00d9ff; text-decoration: none;">Licensing</a> |
+                <a href="terms.html" style="color: #00d9ff; text-decoration: none;">Terms</a> |
+                <a href="privacy.html" style="color: #00d9ff; text-decoration: none;">Privacy</a> |
+                <a href="blog.html" style="color: #00d9ff; text-decoration: none;">Blog</a> |
+                <a href="careers.html" style="color: #00d9ff; text-decoration: none;">Careers</a>
+            </p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

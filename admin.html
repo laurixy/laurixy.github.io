@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LAURIXY Admin Panel</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="https://i.ibb.co/QFVq0ND7/laurixy-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://i.ibb.co/mF454w2h/laurixy-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://i.ibb.co/YBMsHcSW/laurixy-180x180.png">
+    <link rel="icon" type="image/png" sizes="180x180" href="https://i.ibb.co/YBMsHcSW/laurixy-180x180.png">
+    <link rel="icon" type="image/png" href="https://i.ibb.co/NgQP2nZx/laurixy-logo-Edited.png">
+    <link rel="stylesheet" href="admin-styles.css">
+</head>
+
+<body>
+    <!-- Login Screen -->
+    <div id="loginScreen" class="login-container">
+        <div class="login-panel">
+            <div class="logo-section">
+                <div class="logo-text">LAURIXY</div>
+                <div class="tagline">Digital Innovation Hub</div>
+            </div>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" placeholder="admin@laurixy.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="••••••••" required>
+                </div>
+                <button type="submit" class="login-btn">Login</button>
+                <div id="loginError" class="error-message"></div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Admin Panel -->
+    <div id="adminPanel" class="admin-container" style="display: none;">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-logo">
+                <img src="https://i.ibb.co/NgQP2nZx/laurixy-logo-Edited.png" alt="LAURIXY Logo">
+                <span class="sidebar-logo-text">LAURIXY</span>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item"><a class="nav-link active" data-section="overview">📊 Overview</a></li>
+                <li class="nav-item"><a class="nav-link" data-section="users">👥 Users</a></li>
+                <li class="nav-item"><a class="nav-link" data-section="projects">🚀 Projects</a></li>
+                <li class="nav-item"><a class="nav-link" data-section="content">📝 Content</a></li>
+                <li class="nav-item"><a class="nav-link" data-section="messages">💬 Messages</a></li>
+                <li class="nav-item"><a class="nav-link" data-section="logs">📋 Logs</a></li>
+                <li class="nav-item"><a class="nav-link" data-section="settings">⚙️ Settings</a></li>
+            </ul>
+            <button class="logout-btn" id="logoutBtn">Logout</button>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="header">
+                <h1>Admin Dashboard</h1>
+                <div class="user-info">
+                    <div>
+                        <div id="adminEmail" style="font-weight: bold;"></div>
+                        <div style="font-size: 12px; color: var(--text-muted);">Administrator</div>
+                    </div>
+                    <div class="user-avatar" id="userAvatar">A</div>
+                </div>
+            </div>
+
+            <!-- Overview -->
+            <section id="overview" class="section active">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-label">Total Users</div>
+                        <div class="stat-value" id="totalUsers">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Total Projects</div>
+                        <div class="stat-value" id="totalProjects">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Total Messages</div>
+                        <div class="stat-value" id="totalMessages">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Active Projects</div>
+                        <div class="stat-value" id="activeProjects">0</div>
+                    </div>
+                </div>
+                <div class="content-panel">
+                    <div class="panel-title">Recent Activity</div>
+                    <div class="activity-feed" id="activityFeed">
+                        <div class="empty-state">
+                            <div class="empty-state-icon">📭</div>
+                            <div>No activity yet</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Users -->
+            <section id="users" class="section">
+                <div class="content-panel">
+                    <div class="panel-title">User Management</div>
+                    <button class="btn btn-primary" id="addUserBtn">+ Add User</button>
+                    <div class="search-box" style="margin-top: 20px; display: flex; gap: 10px;">
+                        <input type="text" id="userSearch" placeholder="Search by username or email...">
+                        <button class="btn btn-secondary" id="searchUserBtn" onclick="searchUsers()">🔍 SEARCH</button>
+                    </div>
+                    <div class="table-container" style="margin-top: 20px;">
+                        <table id="usersTable">
+                            <thead>
+                                <tr>
+                                    <th>Username</th>
+                                    <th>Email</th>
+                                    <th>Password</th>
+                                    <th>Role</th>
+                                    <th>Status</th>
+                                    <th>Last Login</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="usersTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Projects -->
+            <section id="projects" class="section">
+                <div class="content-panel">
+                    <div class="panel-title">Project Management</div>
+                    <button class="btn btn-primary" id="addProjectBtn">+ Add Project</button>
+                    <div class="search-box" style="margin-top: 20px;">
+                        <input type="text" id="projectSearch" placeholder="Search projects...">
+                    </div>
+                    <div class="table-container" style="margin-top: 20px;">
+                        <table id="projectsTable">
+                            <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Category</th>
+                                    <th>Status</th>
+                                    <th>Order</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="projectsTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Content -->
+            <section id="content" class="section">
+                <div class="content-panel">
+                    <div class="panel-title">Site Content Management</div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Homepage Title</label>
+                            <input type="text" id="homepageTitle" placeholder="Enter homepage title">
+                        </div>
+                        <div class="form-group">
+                            <label>Homepage Subtitle</label>
+                            <input type="text" id="homepageSubtitle" placeholder="Enter subtitle">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>About Section</label>
+                        <textarea id="aboutSection" placeholder="Enter about section content"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Services Section</label>
+                        <textarea id="servicesSection" placeholder="Enter services content"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Footer Text</label>
+                        <textarea id="footerText" placeholder="Enter footer content"></textarea>
+                    </div>
+                    <button class="btn btn-primary" id="saveContentBtn">Save Content</button>
+                </div>
+            </section>
+
+            <!-- Messages -->
+            <section id="messages" class="section">
+                <div class="content-panel">
+                    <div class="panel-title">Messages / Contact Inbox</div>
+                    <div class="search-box">
+                        <input type="text" id="messageSearch" placeholder="Search messages...">
+                    </div>
+                    <div class="table-container" style="margin-top: 20px;">
+                        <table id="messagesTable">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Subject</th>
+                                    <th>Status</th>
+                                    <th>Date</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="messagesTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Logs -->
+            <section id="logs" class="section">
+                <div class="content-panel">
+                    <div class="panel-title">Activity Logs</div>
+                    <div class="terminal-log" id="logsTerminal"></div>
+                </div>
+            </section>
+
+            <!-- Settings -->
+            <section id="settings" class="section">
+                <div class="content-panel">
+                    <div class="panel-title">Settings</div>
+                    <div class="form-group">
+                        <label>Theme</label>
+                        <div style="margin-top: 10px;">
+                            <label style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+                                <input type="radio" name="theme" value="dark" checked>
+                                <span>Dark Mode</span>
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 10px;">
+                                <input type="radio" name="theme" value="light">
+                                <span>Light Mode</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-top: 20px;">
+                        <label>Maintenance Mode</label>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="maintenanceToggle">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="form-group" style="margin-top: 20px;">
+                        <label>Backup & Export</label>
+                        <button class="btn btn-secondary" id="exportBtn">Export Data as JSON</button>
+                    </div>
+                    <div class="form-group" style="margin-top: 20px;">
+                        <label>Admin Profile</label>
+                        <input type="text" id="adminName" placeholder="Admin Name">
+                        <button class="btn btn-primary" id="updateProfileBtn" style="margin-top: 10px;">Update
+                            Profile</button>
+                    </div>
+                    <div class="form-group"
+                        style="margin-top: 30px; padding-top: 20px; border-top: 1px solid var(--border-color);">
+                        <label style="color: #ff006e; font-weight: bold;">⚠️ Production Reset</label>
+                        <p style="font-size: 12px; color: var(--text-muted); margin: 10px 0;">Reset all test data and
+                            prepare for production. This will delete all users, projects, messages, and logs.</p>
+                        <button class="btn btn-danger" id="resetDataBtn" style="margin-top: 10px;">Reset All Data for
+                            Production</button>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Modals -->
+    <div id="userModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('userModal')">&times;</span>
+            <div class="modal-header">Add/Edit User</div>
+            <div class="form-group">
+                <label>Username</label>
+                <input type="text" id="modalUserUsername" placeholder="username">
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" id="modalUserEmail" placeholder="user@example.com">
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="modalUserPassword" placeholder="password">
+            </div>
+            <div class="form-group">
+                <label>Role</label>
+                <select id="modalUserRole">
+                    <option value="Admin">Admin</option>
+                    <option value="Developer">Developer</option>
+                    <option value="Member">Member</option>
+                    <option value="Viewer">Viewer</option>
+                    <option value="user">User</option>
+                </select>
+            </div>
+            <div class="button-group">
+                <button class="btn btn-primary" id="saveUserBtn">Save User</button>
+                <button class="btn btn-secondary" onclick="closeModal('userModal')">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="projectModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('projectModal')">&times;</span>
+            <div class="modal-header">Add/Edit Project</div>
+
+            <div class="form-group">
+                <label>Title *</label>
+                <input type="text" id="modalProjectTitle" placeholder="Project title" required>
+            </div>
+
+            <div class="form-group">
+                <label>Description *</label>
+                <textarea id="modalProjectDesc" placeholder="Project description" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Category *</label>
+                <select id="modalProjectCategory" required>
+                    <option value="">Select Category...</option>
+                    <option value="Website">Website</option>
+                    <option value="App">App</option>
+                    <option value="Game">Game</option>
+                    <option value="AI Tool">AI Tool</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Project Type *</label>
+                <select id="modalProjectType" onchange="toggleProjectTypeFields()" required>
+                    <option value="">Select Type...</option>
+                    <option value="app-link">App / Link</option>
+                    <option value="app-upload">App / Upload (EXE, APK, IPA)</option>
+                    <option value="website-link">Website / Link</option>
+                    <option value="website">Website / Uploadable</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Logo/Image URL</label>
+                <input type="url" id="modalProjectImage" placeholder="https://example.com/image.png">
+            </div>
+
+            <!-- APP LINK TYPE FIELDS -->
+            <div id="appLinkTypeFields" style="display: none;">
+                <div class="form-group">
+                    <label>Download Link *</label>
+                    <input type="url" id="modalProjectLink" placeholder="https://example.com/app.apk">
+                </div>
+                <div class="form-group">
+                    <label>File Size</label>
+                    <input type="text" id="modalProjectFileSize" placeholder="e.g., 50MB">
+                </div>
+            </div>
+
+            <!-- APP UPLOAD TYPE FIELDS -->
+            <div id="appUploadTypeFields" style="display: none;">
+                <div class="form-group">
+                    <label>Upload App/Game File *</label>
+                    <input type="file" id="modalProjectAppFile" accept=".exe,.apk,.ipa,.zip,.dmg,.pkg">
+                    <small style="color: #a0a0a0; display: block; margin-top: 8px;">
+                        📦 Supported: EXE, APK, IPA, ZIP, DMG, PKG
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label>File Size (Auto-detected)</label>
+                    <input type="text" id="modalProjectAppFileSize" placeholder="Will be auto-filled" readonly>
+                </div>
+                <div id="appUploadProgressContainer" style="display: none; margin-top: 15px;">
+                    <div
+                        style="background: rgba(0, 217, 255, 0.1); border: 1px solid #00d9ff; border-radius: 8px; padding: 15px;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                            <span>Uploading...</span>
+                            <span id="appUploadPercentage">0%</span>
+                        </div>
+                        <progress id="appUploadProgressBar" value="0" max="100"
+                            style="width: 100%; height: 6px; border-radius: 3px;"></progress>
+                    </div>
+                </div>
+            </div>
+
+            <!-- WEBSITE LINK TYPE FIELDS -->
+            <div id="websiteLinkTypeFields" style="display: none;">
+                <div class="form-group">
+                    <label>Website URL *</label>
+                    <input type="url" id="modalProjectWebsiteLink" placeholder="https://example.com">
+                </div>
+                <div class="form-group">
+                    <label>Open in New Tab</label>
+                    <select id="modalProjectWebsiteLinkNewTab">
+                        <option value="false">Same Tab</option>
+                        <option value="true">New Tab</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- WEBSITE UPLOADABLE TYPE FIELDS -->
+            <div id="websiteTypeFields" style="display: none;">
+                <div class="form-group">
+                    <label>Upload Website (ZIP File) *</label>
+                    <input type="file" id="modalProjectZip" accept=".zip">
+                    <small style="color: #a0a0a0; display: block; margin-top: 8px;">
+                        📦 Upload a ZIP file containing your website with index.html
+                    </small>
+                </div>
+                <div id="uploadProgressContainer" style="display: none; margin-top: 15px;">
+                    <div
+                        style="background: rgba(0, 217, 255, 0.1); border: 1px solid #00d9ff; border-radius: 8px; padding: 15px;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                            <span>Uploading...</span>
+                            <span id="uploadPercentage">0%</span>
+                        </div>
+                        <progress id="uploadProgressBar" value="0" max="100"
+                            style="width: 100%; height: 6px; border-radius: 3px;"></progress>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Status</label>
+                <select id="modalProjectStatus">
+                    <option value="Active">Active</option>
+                    <option value="Upcoming">Upcoming</option>
+                    <option value="Hidden">Hidden</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Display Order</label>
+                <input type="number" id="modalProjectOrder" placeholder="0" min="0">
+            </div>
+
+            <div class="button-group">
+                <button class="btn btn-primary" id="saveProjectBtn">Save Project</button>
+                <button class="btn btn-secondary" onclick="closeModal('projectModal')">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="messageModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('messageModal')">&times;</span>
+            <div class="modal-header">Message Details</div>
+            <div style="margin-bottom: 15px;">
+                <div style="font-size: 12px; color: var(--text-muted); margin-bottom: 5px;">FROM</div>
+                <div id="modalMessageName" style="font-weight: bold;"></div>
+                <div id="modalMessageEmail" style="font-size: 14px;"></div>
+            </div>
+            <div style="margin-bottom: 15px;">
+                <div style="font-size: 12px; color: var(--text-muted); margin-bottom: 5px;">SUBJECT</div>
+                <div id="modalMessageSubject" style="font-weight: bold;"></div>
+            </div>
+            <div style="margin-bottom: 15px;">
+                <div style="font-size: 12px; color: var(--text-muted); margin-bottom: 5px;">MESSAGE</div>
+                <div id="modalMessageContent" style="line-height: 1.6;"></div>
+            </div>
+            <div class="button-group">
+                <button class="btn btn-secondary" id="replyMessageBtn">Reply via Email</button>
+                <button class="btn btn-danger" id="deleteMessageBtn">Delete</button>
+                <button class="btn btn-secondary" onclick="closeModal('messageModal')">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-storage-compat.js"></script>
+
+    <!-- JSZip for ZIP extraction -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+
+    <script src="firebase-config.js"></script>
+    <script src="firebase-admin.js"></script>
+    <script src="website-upload-handler.js"></script>
+
+    <script src="admin-script.js"></script>
+</body>
+
+</html>

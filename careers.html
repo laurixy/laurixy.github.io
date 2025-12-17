@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
+    <meta name="description" content="LAURIXY - Careers - Join Our Team">
+    <meta name="theme-color" content="#0a0a0f">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>LAURIXY - CAREERS</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="https://i.ibb.co/QFVq0ND7/laurixy-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://i.ibb.co/mF454w2h/laurixy-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://i.ibb.co/YBMsHcSW/laurixy-180x180.png">
+    <link rel="icon" type="image/png" sizes="180x180" href="https://i.ibb.co/YBMsHcSW/laurixy-180x180.png">
+    <link rel="icon" type="image/png" href="https://i.ibb.co/NgQP2nZx/laurixy-logo-Edited.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .career-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .career-card {
+            background: rgba(131, 56, 236, 0.05);
+            border: 1px solid #8338ec;
+            border-radius: 15px;
+            padding: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .career-card:hover {
+            background: rgba(131, 56, 236, 0.1);
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px rgba(131, 56, 236, 0.3);
+        }
+
+        .career-card h3 {
+            color: #8338ec;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+
+        .career-description {
+            color: #e0e0e0;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .career-requirements {
+            color: #00d9ff;
+            font-size: 14px;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="particleCanvas"></canvas>
+    <div class="grid-background"></div>
+    <div id="mouseTrail"></div>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html">
+                    <img src="https://i.ibb.co/NgQP2nZx/laurixy-logo-Edited.png" alt="LAURIXY Logo" class="site-logo"
+                        style="height:40px;">
+                    <span class="logo-text" style="margin-left: 0.5rem;">LAURIXY</span>
+                </a>
+            </div>
+            <div class="nav-menu" id="navMenu">
+                <a href="index.html" class="nav-link">HOME</a>
+                <a href="index.html#apps" class="nav-link">APPS</a>
+                <a href="index.html#websites" class="nav-link">WEBSITES</a>
+                <a href="index.html#games" class="nav-link">GAMES</a>
+                <a href="index.html#about" class="nav-link">ABOUT</a>
+                <a href="index.html#contact" class="nav-link">CONTACT</a>
+            </div>
+            <div class="auth-nav" id="authNav">
+                <div class="auth-buttons" id="authButtons">
+                    <a href="login.html" class="nav-link" id="loginLink">LOGIN</a>
+                    <a href="signup.html" class="nav-link" id="signupLink">SIGN UP</a>
+                </div>
+                <div class="user-profile" id="userProfile" style="display: none;">
+                    <div class="user-avatar" id="userAvatar">H</div>
+                    <span class="user-name" id="userName">User</span>
+                    <a href="#" class="nav-link" id="logoutLink" onclick="logout()">LOGOUT</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section class="content-section" style="padding: 100px 20px; min-height: 100vh;">
+        <div class="container" style="max-width: 1000px; margin: 0 auto;">
+            <h1 class="glitch-text" data-text="CAREERS" style="text-align: center; margin-bottom: 20px;">CAREERS</h1>
+            <p style="text-align: center; color: #ff006e; font-size: 18px; margin-bottom: 50px;">
+                Join Laurixy and be part of a global digital innovation hub. We're looking for passionate developers,
+                designers, and creators to help build the future.
+            </p>
+
+            <div class="content-box"
+                style="background: rgba(0, 217, 255, 0.05); border: 1px solid #00d9ff; border-radius: 15px; padding: 30px; margin-bottom: 50px;">
+                <h2 style="color: #00d9ff; margin-bottom: 20px;">🌟 Why Join Laurixy?</h2>
+                <ul style="line-height: 2; color: #e0e0e0; font-size: 16px;">
+                    <li>✓ Work on cutting-edge digital innovation projects</li>
+                    <li>✓ Collaborate with talented developers and designers</li>
+                    <li>✓ Competitive compensation and benefits</li>
+                    <li>✓ Remote-friendly work environment</li>
+                    <li>✓ Continuous learning and professional development</li>
+                    <li>✓ Be part of a global creative community</li>
+                </ul>
+            </div>
+
+            <h2 style="color: #8338ec; margin-bottom: 30px; text-align: center;">🚀 Open Positions</h2>
+
+            <div class="career-grid">
+                <div class="career-card">
+                    <h3>👨‍💻 Full Stack Developer</h3>
+                    <p class="career-description">
+                        We're looking for experienced full-stack developers to build scalable web applications and
+                        digital tools.
+                    </p>
+                    <p class="career-requirements">
+                        <strong>Requirements:</strong> JavaScript, React, Node.js, Database design
+                    </p>
+                </div>
+
+                <div class="career-card">
+                    <h3>🎨 UI/UX Designer</h3>
+                    <p class="career-description">
+                        Create beautiful and intuitive user interfaces for our digital products and applications.
+                    </p>
+                    <p class="career-requirements">
+                        <strong>Requirements:</strong> Figma, Design systems, User research
+                    </p>
+                </div>
+
+                <div class="career-card">
+                    <h3>📱 Mobile Developer</h3>
+                    <p class="career-description">
+                        Develop high-performance mobile applications for iOS and Android platforms.
+                    </p>
+                    <p class="career-requirements">
+                        <strong>Requirements:</strong> React Native, Swift, Kotlin
+                    </p>
+                </div>
+
+                <div class="career-card">
+                    <h3>🔐 Security Engineer</h3>
+                    <p class="career-description">
+                        Ensure the security and integrity of our platforms and user data.
+                    </p>
+                    <p class="career-requirements">
+                        <strong>Requirements:</strong> Security protocols, Penetration testing, Encryption
+                    </p>
+                </div>
+
+                <div class="career-card">
+                    <h3>📊 Data Analyst</h3>
+                    <p class="career-description">
+                        Analyze user data and provide insights to drive product improvements.
+                    </p>
+                    <p class="career-requirements">
+                        <strong>Requirements:</strong> SQL, Python, Data visualization
+                    </p>
+                </div>
+
+                <div class="career-card">
+                    <h3>🎯 Product Manager</h3>
+                    <p class="career-description">
+                        Lead the vision and strategy for our digital products and features.
+                    </p>
+                    <p class="career-requirements">
+                        <strong>Requirements:</strong> Product strategy, User research, Analytics
+                    </p>
+                </div>
+            </div>
+
+            <div class="content-box"
+                style="background: rgba(255, 0, 110, 0.05); border: 1px solid #ff006e; border-radius: 15px; padding: 30px; margin-top: 50px;">
+                <h2 style="color: #ff006e; margin-bottom: 20px;">📧 How to Apply</h2>
+                <p style="line-height: 1.8; color: #e0e0e0; font-size: 16px; margin-bottom: 20px;">
+                    Ready to join our team? Send your resume and portfolio to:
+                </p>
+                <p style="color: #00d9ff; font-weight: bold; font-size: 18px; margin-bottom: 20px;">
+                    laurixyofficial@gmail.com
+                </p>
+                <p style="line-height: 1.8; color: #e0e0e0; font-size: 16px;">
+                    <strong>Subject Line:</strong> [Position Name] - Application<br>
+                    <strong>Include:</strong> Resume, Portfolio/GitHub, Cover Letter (optional)
+                </p>
+            </div>
+
+            <div style="text-align: center; margin-top: 50px;">
+                <p style="color: #8338ec; font-size: 16px;">
+                    Don't see a position that fits? We're always looking for talented individuals. Feel free to reach
+                    out!
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2025 LAURIXY. All Rights Reserved. |
+                <a href="licensing.html" style="color: #00d9ff; text-decoration: none;">Licensing</a> |
+                <a href="terms.html" style="color: #00d9ff; text-decoration: none;">Terms</a> |
+                <a href="privacy.html" style="color: #00d9ff; text-decoration: none;">Privacy</a> |
+                <a href="blog.html" style="color: #00d9ff; text-decoration: none;">Blog</a> |
+                <a href="careers.html" style="color: #00d9ff; text-decoration: none;">Careers</a>
+            </p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

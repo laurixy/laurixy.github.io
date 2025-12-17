@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
+    <meta name="description" content="LAURIXY - Sign up to join our digital innovation hub">
+    <meta name="theme-color" content="#0a0a0f">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>LAURIXY - Sign Up</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="https://i.ibb.co/QFVq0ND7/laurixy-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://i.ibb.co/mF454w2h/laurixy-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://i.ibb.co/YBMsHcSW/laurixy-180x180.png">
+    <link rel="icon" type="image/png" sizes="180x180" href="https://i.ibb.co/YBMsHcSW/laurixy-180x180.png">
+    <link rel="icon" type="image/png" href="https://i.ibb.co/NgQP2nZx/laurixy-logo-Edited.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="auth.css">
+</head>
+
+<body>
+    <!-- Canvas for particle system -->
+    <canvas id="particleCanvas"></canvas>
+
+    <!-- Animated grid background -->
+    <div class="grid-background"></div>
+
+    <!-- Mouse trail container -->
+    <div id="mouseTrail"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html">
+                    <img src="https://i.ibb.co/NgQP2nZx/laurixy-logo-Edited.png" alt="LAURIXY Logo" class="site-logo"
+                        style="height:40px;">
+                    <span class="logo-text" style="margin-left: 0.5rem;">LAURIXY</span>
+                </a>
+            </div>
+            <div class="nav-menu" id="navMenu">
+                <a href="index.html" class="nav-link">BACK TO HOME</a>
+            </div>
+            <div class="auth-nav" id="authNav">
+                <a href="login.html" class="nav-link" id="loginLink">LOGIN</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sign Up Section -->
+    <section class="auth-section">
+        <div class="auth-container">
+            <div class="auth-box">
+                <h2 class="glitch-text" data-text="SIGN UP">SIGN UP</h2>
+                <div class="holographic-rings">
+                    <div class="ring"></div>
+                    <div class="ring"></div>
+                    <div class="ring"></div>
+                </div>
+                <form id="signupForm" class="auth-form">
+                    <div class="form-group">
+                        <input type="text" id="username" name="username" required>
+                        <label for="username">USERNAME</label>
+                        <div class="form-line"></div>
+                        <div id="usernameStatus" style="font-size: 12px; margin-top: 5px; color: #ff006e;"></div>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" name="email" required>
+                        <label for="email">EMAIL</label>
+                        <div class="form-line"></div>
+                    </div>
+                    <div class="form-group password-group">
+                        <input type="password" id="password" name="password" required>
+                        <button type="button" class="password-toggle" aria-label="Show password" data-target="password">
+                            <span class="eye" aria-hidden="true"></span>
+                        </button>
+                        <label for="password">PASSWORD</label>
+                        <div class="form-line"></div>
+                    </div>
+                    <div class="form-group password-group">
+                        <input type="password" id="confirmPassword" name="confirmPassword" required>
+                        <button type="button" class="password-toggle" aria-label="Show password"
+                            data-target="confirmPassword">
+                            <span class="eye" aria-hidden="true"></span>
+                        </button>
+                        <label for="confirmPassword">CONFIRM PASSWORD</label>
+                        <div class="form-line"></div>
+                    </div>
+                    <div class="form-options">
+                        <label class="checkbox-container">
+                            I agree to the Terms & Conditions
+                            <input type="checkbox" id="terms" required>
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+                    <button type="submit" class="btn-primary">CREATE ACCOUNT</button>
+                </form>
+                <div class="auth-footer">
+                    <p>Already have an account? <a href="login.html">Login</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+    <script src="firebase-config.js"></script>
+
+    <script src="script.js"></script>
+    <script src="auth.js"></script>
+</body>
+
+</html>

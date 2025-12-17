@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Viewer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #0a0a0f;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+        
+        #website-container {
+            width: 100%;
+            flex: 1;
+            overflow: auto;
+        }
+        
+        #adsterra-bottom-banner {
+            text-align: center;
+            background: rgba(10, 10, 15, 0.95);
+            border-top: 1px solid rgba(0, 240, 255, 0.2);
+            padding: 1rem;
+            z-index: 999;
+            position: relative;
+            min-height: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .error-message {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: #0a0a0f;
+            color: #ff006e;
+            font-size: 18px;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .loading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: #0a0a0f;
+            color: #00d9ff;
+            font-size: 18px;
+        }
+        
+        .spinner {
+            border: 3px solid rgba(0, 217, 255, 0.2);
+            border-top: 3px solid #00d9ff;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin-right: 15px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div id="website-container"></div>
+    
+    <!-- Bottom Banner Ad -->
+    <div id="adsterra-bottom-banner"></div>
+    
+    <script src="../website-upload-handler.js"></script>
+    <script>
+        // Adsterra Banner Ad Configuration
+        const ADSTERRA_BANNER_ID = '27970529';
+        
+        // Get project ID from URL
+        const urlParams = new URLSearchParams(window.location.pathname);
+        const projectId = window.location.pathname.split('/').filter(p => p && p !== 'websites' && p !== 'viewer.html')[0];
+        
+        console.log('🌐 Website Viewer loaded');
+        console.log('🆔 Project ID:', projectId);
+        console.log('📊 Adsterra Banner ID:', ADSTERRA_BANNER_ID);
+        
+        // Initialize bottom banner ad
+        function initBottomBannerAd() {
+            const bannerContainer = document.getElementById('adsterra-bottom-banner');
+            if (bannerContainer) {
+                bannerContainer.innerHTML = `
+                    <script type="text/javascript">
+                        atOptions = {
+                            'key' : '779a2864d9bc1409750cb7ab28a1f9d0',
+                            'format' : 'iframe',
+                            'height' : 90,
+                            'width' : 728,
+                            'params' : {}
+                        };
+                    </script>
+                    <script type="text/javascript" src="//www.highperformanceformat.com/779a2864d9bc1409750cb7ab28a1f9d0/invoke.js"></script>
+                `;
+                console.log('✅ Bottom banner ad initialized');
+            }
+        }
+        
+        async function loadWebsite() {
+            const container = document.getElementById('website-container');
+            
+            if (!projectId) {
+                container.innerHTML = '<div class="error-message">❌ No project ID provided</div>';
+                return;
+            }
+            
+            // Show loading
+            container.innerHTML = '<div class="loading"><div class="spinner"></div>Loading website...</div>';
+            
+            try {
+                // Get website files
+                const websiteData = await getWebsiteFiles(projectId);
+                
+                if (!websiteData) {
+                    container.innerHTML = '<div class="error-message">❌ Website not found: ' + projectId + '</div>';
+                    console.error('Website not found:', projectId);
+                    return;
+                }
+                
+                console.log('✅ Website found:', projectId);
+                console.log('📁 Files:', websiteData.fileCount);
+                
+                // Get index.html
+                let indexContent = websiteData.files['index.html'] || websiteData.files['./index.html'];
+                
+                if (!indexContent) {
+                    container.innerHTML = '<div class="error-message">❌ index.html not found in website</div>';
+                    console.error('index.html not found');
+                    return;
+                }
+                
+                console.log('✅ index.html found');
+                
+                // Create iframe to serve website
+                const iframe = document.createElement('iframe');
+                iframe.style.width = '100%';
+                iframe.style.height = '100%';
+                iframe.style.border = 'none';
+                iframe.sandbox.add('allow-same-origin');
+                iframe.sandbox.add('allow-scripts');
+                iframe.sandbox.add('allow-forms');
+                iframe.sandbox.add('allow-popups');
+                
+                container.innerHTML = '';
+                container.appendChild(iframe);
+                
+                // Write content to iframe
+                const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+                iframeDoc.open();
+                iframeDoc.write(indexContent);
+                iframeDoc.close();
+                
+                console.log('✅ Website loaded in iframe');
+                
+                // Initialize bottom banner ad
+                initBottomBannerAd();
+                
+            } catch (error) {
+                console.error('❌ Error loading website:', error);
+                container.innerHTML = '<div class="error-message">❌ Error loading website: ' + error.message + '</div>';
+            }
+        }
+        
+        // Load website when page loads
+        window.addEventListener('load', loadWebsite);
+        
+        // Also try to load immediately
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', loadWebsite);
+        } else {
+            loadWebsite();
+        }
+    </script>
+</body>
+</html>
