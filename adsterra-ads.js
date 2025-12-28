@@ -2,7 +2,7 @@
 // ADSTERRA ADS INTEGRATION - APPROVED CODE
 // ============================================
 // Approved Adsterra banner ad code
-// Key: 779a2864d9bc1409750cb7ab28a1f9d0
+// Key: cbcd213f36f3fc208b64d6309fd93a03
 // ============================================
 
 console.log('🎯 Initializing Adsterra ads (Approved Code)...');
@@ -12,7 +12,7 @@ console.log('🎯 Initializing Adsterra ads (Approved Code)...');
 // ============================================
 function initAdsterraBannerAds() {
     console.log('📊 Initializing Adsterra banner ads...');
-    
+
     // Create top banner if it doesn't exist
     if (!document.getElementById('adsterra-top-banner')) {
         const topBanner = document.createElement('div');
@@ -26,28 +26,28 @@ function initAdsterraBannerAds() {
             position: relative;
             min-height: 100px;
         `;
-        
+
         // Add Adsterra approved banner code
         topBanner.innerHTML = `
             <div style="display: flex; justify-content: center; align-items: center; min-height: 90px;">
                 <script type="text/javascript">
                     atOptions = {
-                        'key' : '779a2864d9bc1409750cb7ab28a1f9d0',
+                        'key' : 'cbcd213f36f3fc208b64d6309fd93a03',
                         'format' : 'iframe',
                         'height' : 90,
                         'width' : 728,
                         'params' : {}
                     };
                 </script>
-                <script type="text/javascript" src="//www.highperformanceformat.com/779a2864d9bc1409750cb7ab28a1f9d0/invoke.js"></script>
+                <script type="text/javascript" src="//www.highperformanceformat.com/cbcd213f36f3fc208b64d6309fd93a03/invoke.js"></script>
             </div>
         `;
-        
+
         // Insert at the beginning of body
         document.body.insertBefore(topBanner, document.body.firstChild);
         console.log('✅ Top banner created with approved code');
     }
-    
+
     // Create bottom banner if it doesn't exist
     if (!document.getElementById('adsterra-bottom-banner')) {
         const bottomBanner = document.createElement('div');
@@ -61,23 +61,23 @@ function initAdsterraBannerAds() {
             position: relative;
             min-height: 100px;
         `;
-        
+
         // Add Adsterra approved banner code
         bottomBanner.innerHTML = `
             <div style="display: flex; justify-content: center; align-items: center; min-height: 90px;">
                 <script type="text/javascript">
                     atOptions = {
-                        'key' : '779a2864d9bc1409750cb7ab28a1f9d0',
+                        'key' : 'cbcd213f36f3fc208b64d6309fd93a03',
                         'format' : 'iframe',
                         'height' : 90,
                         'width' : 728,
                         'params' : {}
                     };
                 </script>
-                <script type="text/javascript" src="//www.highperformanceformat.com/779a2864d9bc1409750cb7ab28a1f9d0/invoke.js"></script>
+                <script type="text/javascript" src="//www.highperformanceformat.com/cbcd213f36f3fc208b64d6309fd93a03/invoke.js"></script>
             </div>
         `;
-        
+
         // Insert at the end of body
         document.body.appendChild(bottomBanner);
         console.log('✅ Bottom banner created with approved code');
